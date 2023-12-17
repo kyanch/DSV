@@ -437,7 +437,7 @@ void Canvas::paintEvent(QPaintEvent *event)
 
 void Canvas::mousePressEvent(QMouseEvent *event)
 {
-    _mouse_pos_1 = event->localPos();
+    _mouse_pos_1 = event->position();
     const double real_x1 = _mouse_pos_1.x() * _view_ctm[0] + _mouse_pos_1.y() * _view_ctm[3] + _view_ctm[6];
     const double real_y1 = _mouse_pos_1.x() * _view_ctm[1] + _mouse_pos_1.y() * _view_ctm[4] + _view_ctm[7];
     switch (event->button())
@@ -574,7 +574,7 @@ void Canvas::mousePressEvent(QMouseEvent *event)
 void Canvas::mouseReleaseEvent(QMouseEvent *event)
 {
     std::swap(_mouse_pos_0, _mouse_pos_1);
-    _mouse_pos_1 = event->localPos();
+    _mouse_pos_1 = event->position();
     switch (event->button())
     {
     case Qt::LeftButton:
@@ -613,7 +613,7 @@ void Canvas::mouseMoveEvent(QMouseEvent *event)
 {
     const double center_x = size().width() / 2.0, center_y = size().height() / 2.0;
     std::swap(_mouse_pos_0, _mouse_pos_1);
-    _mouse_pos_1 = event->localPos();
+    _mouse_pos_1 = event->position();
     double mat[9];
     std::memcpy(mat, _view_ctm, sizeof(double) * 9);
     const double real_x1 = _mouse_pos_1.x() * _view_ctm[0] + _mouse_pos_1.y() * _view_ctm[3] + _view_ctm[6];
@@ -806,7 +806,7 @@ void Canvas::wheelEvent(QWheelEvent *event)
 
 void Canvas::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    _mouse_pos_1 = event->localPos();
+    _mouse_pos_1 = event->position();
     switch (event->button())
     {
     case Qt::LeftButton:
